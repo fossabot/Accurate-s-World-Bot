@@ -34,8 +34,16 @@ async def on_message(message):
         
         
 @client.command(name="ping", brief="Display Bot ping")
-async def ping(ctx):
-    embed = discord.Embed(title="Pong!", description=client.latency + "ms",)
+async def ping(ctx, *args, **kwargs):
+    """Returns Bot Ping
+
+    Args:
+        ctx (any): context
+
+    Returns:
+        integer: Exit code
+    """
+    embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
         
