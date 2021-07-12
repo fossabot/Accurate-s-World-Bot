@@ -42,5 +42,5 @@ class leveling(commands.Cog):
         embed = discord.Embed(title="Level", description=f"Currently, your level is {userLevel}", color=0x3514db)  # sends it in an embed
 
 
-def setup(client):
-    client.add_cog(leveling(client))  # registers cog
+def setup(bot):
+    bot.add_cog(leveling(bot))  # registers cog

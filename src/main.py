@@ -56,7 +56,7 @@ async def get_ping(ctx):
     
         
 try:
-    client.load_extension("src.extensions.leveling.py")
+    client.load_extension("extensions.leveling")
     
 except ExtensionAlreadyLoaded:
     print("[WARN] Cog Already loaded.")
