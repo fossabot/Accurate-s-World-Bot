@@ -3,3 +3,5 @@
 .vscode
 SECRET.json
 levels.json
+__pycache__
+*.pyc
