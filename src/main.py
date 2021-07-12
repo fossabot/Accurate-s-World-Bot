@@ -1,8 +1,11 @@
 import discord
 from discord.ext import commands
+import json
 
 
 client = commands.Bot(command_prefix="!")
+with open("SECRET.json", "r")as f:
+    settings = json.load(f)
 
 
 @client.event
@@ -37,4 +40,4 @@ async def ping(ctx):
     return 0
         
 
-client.run("")  # <- token goes here
+client.run(settings["token"])
