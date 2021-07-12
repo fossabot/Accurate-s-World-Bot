@@ -4,7 +4,7 @@ import json
 
 
 client = commands.Bot(command_prefix="!")
-with open("SECRET.json", "r")as f:
+with open("src\SECRET.json", "r")as f:
     settings = json.load(f)
 
 
