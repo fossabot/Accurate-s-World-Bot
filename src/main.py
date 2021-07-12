@@ -1,10 +1,11 @@
 import discord
-from discord.ext import commands, ExtensionAlreadyLoaded, NoEntryPointError, ExtensionFailed
+from discord.ext import commands
+from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionFailed, NoEntryPointError
 import json
 
 
 client = commands.Bot(command_prefix="!")
-with open("src/SECRET.json", "r")as f:
+with open("src\SECRET.json", "r")as f:
     settings = json.load(f)
 
 
@@ -29,8 +30,8 @@ async def ping(ctx, *args, **kwargs):
         
         
 try:
-    client.load_extension("src.extensions.leveling.py")
-    client.load_extension("src.extensions.chat.leveling.py")
+    #  client.load_extension("src/extensions/leveling.py")
+    client.load_extension("extensions.chat.chatFilter")
     
 except ExtensionAlreadyLoaded:
     print("[WARN] Cog Already loaded.")
