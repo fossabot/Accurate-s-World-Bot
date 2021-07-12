@@ -18,7 +18,7 @@ class chatFilter(commands.Cog):
         Returns:
             integer: Exit code
         """
-        with open("src\extensions\chat\badWords.json", "r") as f:
+        with open("./src/extensions/chat/badWords.json", "r") as f:
             json.load(f)
             bWordsList = f["bad-words"]
         if message.content.lower() in bWordsList:
