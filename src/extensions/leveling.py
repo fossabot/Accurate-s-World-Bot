@@ -21,17 +21,17 @@ class leveling(commands.Cog):
         global levelsFile
         userName= message.author.name 
         
-        with open("levels.json", "a+") as levelsFile:# opens the file where levels are contained
+        with open("src\extensions\levels.json", "a+", encoding="utf-8") as levelsFile:  # opens the file where levels are contained
             json.load(levelsFile)
             if userName in levelsFile:
                 userRegistered = True
             else:
-                levelsFile[userName] = 0
+                json.dump(userName = 0)  # TODO: FIX THIS BULLSHIT
         levelsFile[userName] ++ 1
     
     
-    @commands.command(name="level", brief="Get your current level.")
-    async def get_level(self):
+    @commands.command()
+    async def level(self, ctx):
         """
         rounds the points to the nearest 10, then divides it by ten. Example Below.
         example: if the points are equal to 23, then the level is 2. And considering this, this also means that 26 points is equal to level 3.
@@ -40,6 +40,7 @@ class leveling(commands.Cog):
         
         userLevel = round(levelsFile[userName] / 10) * 10  # calculates the level with the points given
         embed = discord.Embed(title="Level", description=f"Currently, your level is {userLevel}", color=0x3514db)  # sends it in an embed
+        await ctx.channel.send(embed=embed)
 
 
 def setup(bot):
