@@ -18,7 +18,7 @@ class chatFilter(commands.Cog):
         Returns:
             integer: Exit code
         """
-        with open("basWords.json", "r") as f:
+        with open("badWords.json", "r") as f:
             json.load(f)
             bWordsList = f["bad-words"]
         if message.content.lower() in bWordsList:
