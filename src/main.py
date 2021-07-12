@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, ExtensionAlreadyLoaded, NoEntryPointError, ExtensionFailed
 import json
 
 
@@ -27,5 +27,22 @@ async def ping(ctx, *args, **kwargs):
     await ctx.channel.send(embed=embed)
     return 0
         
+        
+try:
+    client.load_extension("src.extensions.leveling.py")
+    client.load_extension("src.extensions.chat.leveling.py")
+    
+except ExtensionAlreadyLoaded:
+    print("[WARN] Cog Already loaded.")
+
+except NoEntryPointError:
+    raise "[FATAL] Cog does not have a setup function!"
+
+except ExtensionFailed as err:
+    with open("DEBUG/TRACE.txt", "w") as f:
+        f.append(err)
+        
+    raise "[FATAL] Extension failed loading (runtime error)! Traceback was stored in DEBUG/TRACE.txt"
+
 
 client.run(settings["token"])
