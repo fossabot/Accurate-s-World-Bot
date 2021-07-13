@@ -44,7 +44,10 @@ async def ping(ctx, *args, **kwargs):
     embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
-  
+
+@client.command(name="debug", brief="Debug command for developers")
+async def debug(ctx):
+    await ctx.send('--')
         
 try:
     client.load_extension("extensions.leveling")
