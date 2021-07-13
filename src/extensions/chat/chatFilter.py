@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from discord.ext import commands
 import json
@@ -17,7 +18,7 @@ class chatFilter(commands.Cog):
 
 
     @commands.Cog.listener()
-    async def on_message(self, ctx, message):
+    async def on_message(self, message):
         """Checks each message sent for bad words
 
         Args:
@@ -29,14 +30,14 @@ class chatFilter(commands.Cog):
         global enabled
         if enabled is True:
             with open("./src/extensions/chat/badWords.json", "r") as outFile:
-                json.load(outFile)
-                bWordsList = outFile["bad-words"]
-            if message.content.lower() in bWordsList:
-                message.delete()
-                
-                embed = discord.Embed(title=f"HEY {message.author.mention}", description="NO BAD WORDS :rage:", color=0xff0000)
-                await ctx.channel.send(embed=embed)
-                await message.send(f".warn {message.author.mention}")
+                bWordsList = json.load(outFile)
+            if message.content.lower() in bWordsList["bad-words"]:
+                await message.delete()              
+                embed = discord.Embed(title=f"You are not allowed ro say that, {message.author.name}", description="These types of words are against our rules and will not be tolerated", color=0xff0000)                
+                await message.channel.send(embed=embed, delete_after=10)
+                await message.channel.send(f"?warn {message.author.mention}", delete_after=10)
+                await asyncio.sleep(1)
+                #  await message.channel.send("Dyno my man", delete_after=10)
         else:
             return 0
         
@@ -51,8 +52,7 @@ class chatFilter(commands.Cog):
     
     
     @wordfilter.command()
-    @commands.has_permissions("administrator")
-    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def disable(self, ctx):
         """Disables the Word Filter
 
@@ -75,8 +75,7 @@ class chatFilter(commands.Cog):
             
             
     @wordfilter.command()
-    @commands.has_permissions("administrator")
-    @commands.command()
+    @commands.has_permissions(administrator=True)
     async def enable(self, ctx):
         """Enables the Word Filter
 
