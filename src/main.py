@@ -1,4 +1,3 @@
-from logging import DEBUG
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionFailed, NoEntryPointError
