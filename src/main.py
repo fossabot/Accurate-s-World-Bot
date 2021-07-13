@@ -70,7 +70,9 @@ async def die(ctx):
     ctx.message.channel.send("You're dead now.")
     return 0
 
-
+@client.command(name='hello')
+async def hello(ctx):
+    await ctx.channel.send("hi")
 @client.command(name="joke")
 async def joke(ctx):
     def jokes(f):
