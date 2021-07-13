@@ -33,11 +33,8 @@ class chatFilter(commands.Cog):
                 bWordsList = json.load(outFile)
             if message.content.lower() in bWordsList["bad-words"]:
                 await message.delete()              
-                embed = discord.Embed(title=f"You are not allowed ro say that, {message.author.name}", description="These types of words are against our rules and will not be tolerated", color=0xff0000)                
+                embed = discord.Embed(title=f"You are not allowed to say that, {message.author.name}", description="These types of words are against our rules and will not be tolerated", color=0xff0000)                
                 await message.channel.send(embed=embed, delete_after=10)
-                await message.channel.send(f"?warn {message.author.mention}", delete_after=10)
-                await asyncio.sleep(1)
-                #  await message.channel.send("Dyno my man", delete_after=10)
         else:
             return 0
         

@@ -5,7 +5,7 @@ import json
 from json import JSONDecodeError
 from datetime import datetime
 from sys import exit
-from main import DEBUG, WARNING, FATAL
+from main import DEBUG
 
 
 class leveling(commands.Cog):
@@ -49,11 +49,11 @@ class leveling(commands.Cog):
         example: if the points are equal to 23, then the level is 2. And considering this, this also means that 26 points is equal to level 3.
         This means that a level is equal to roughly ~7 points.
         """
-        
+        global levelsFile
         try:
             with open("src\extensions\levels.json", "r") as outFile:
                 points = json.load(outFile)
-            userLevel = round(levelsFile[userName] / 10) * 10 / 10  # calculates the level with the points given
+            userLevel = round(levelsFile[userName] / 10)  # calculates the level with the points given
             int(userLevel)
             embed = discord.Embed(title="Level", description=f"Currently, your level is {userLevel}. ({points[userName]} points)", color=0x3514db)  # sends it in an embed
             await ctx.channel.send(embed=embed)

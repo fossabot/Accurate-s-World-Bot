@@ -4,9 +4,10 @@ from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionFailed,
 import json
 import sys
 from termcolor import colored
+from pretty_help import PrettyHelp
 
 
-client = commands.Bot(command_prefix="!")
+client = commands.Bot(command_prefix=["ro ", "Ro ", "ro!", "Ro!"], activity=discord.Game(name="ro help"), help_command=PrettyHelp())  # yes I know I can use case_insensitive but it doesn't work
 DEBUG = colored("DEBUG", "green")
 FATAL = colored("FATAL", "red")
 WARNING = colored("WARNING", "yellow")
@@ -23,11 +24,6 @@ async def on_connect():
 async def on_disconnect():
     print(f"[{FATAL}] Disconnect from Discord servers. Exiting.")
     sys.exit()
-
-
-@client.event
-async def on_ready():
-    print(f"[{DEBUG}] Bot is online")
 
 
 @client.event
