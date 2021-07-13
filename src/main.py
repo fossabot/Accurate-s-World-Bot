@@ -28,13 +28,6 @@ async def on_disconnect():
 @client.event
 async def on_ready():
     print(f"[{DEBUG}] Bot is online")
-=======
-import json
-
-
-client = commands.Bot(command_prefix="!")
-with open("src\SECRET.json", "r")as f:
-    settings = json.load(f)
 
 
 @client.event
