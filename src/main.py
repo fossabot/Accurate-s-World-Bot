@@ -5,9 +5,12 @@ import json
 import sys
 from termcolor import colored
 from pretty_help import PrettyHelp
+import random
+import requests
 
 
-client = commands.Bot(command_prefix=["ro ", "Ro ", "ro!", "Ro!"], activity=discord.Game(name="ro help"), help_command=PrettyHelp())  # yes I know I can use case_insensitive but it doesn't work
+client = commands.Bot(command_prefix=["ro ", "Ro ", "ro!", "Ro!"], activity=discord.Game(name="ro help!"))  # yes I know I can use case_insensitive but it doesn't work
+client.help_command = PrettyHelp(ending_note="[CLASSIFIED]", show_index=False, no_category="Misc")
 DEBUG = colored("DEBUG", "green")
 FATAL = colored("FATAL", "red")
 WARNING = colored("WARNING", "yellow")
@@ -44,6 +47,45 @@ async def ping(ctx, *args, **kwargs):
     embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
+
+
+@client.command(name="coinflip", brief="Heads or tails? Flip the coin!")
+async def coinflip(ctx, *args, **kwargs):
+    """Chooses between heads or tails.
+
+    Args:
+        ctx (any): Context
+
+    Returns:
+    integer: Exit code
+    """
+    possibilities = ["Tails", "Heads"]
+    embed = discord.Embed(title=random.choice(possibilities) + " !", set_image="https://w7.pngwing.com/pngs/724/435/png-transparent-dollar-coin-computer-icons-drawing-coin-gold-coin-gold-number.png")
+    await ctx.channel.send(embed=embed)
+    return 0
+  
+  
+@client.command(name="die", brief="Die.")
+async def die(ctx):
+    ctx.message.channel.send("You're dead now.")
+    return 0
+
+
+@client.command(name="joke")
+async def joke(ctx):
+    def jokes(f):
+        data = requests.get(f)
+        tt = json.loads(data.text)
+        return tt
+    
+    f = r"https://official-joke-api.appspot.com/random_joke"
+    a = jokes(f)
+    
+    for i in (a):
+        print(i["type"])
+        print(i["setup"])
+        print(i["punchline"],
+    embed = discord.Embed(title="Jokes", description=)    
   
         
 try:
