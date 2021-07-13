@@ -84,8 +84,8 @@ async def joke(ctx):
     for i in (a):
         print(i["type"])
         print(i["setup"])
-        print(i["punchline"],
-    embed = discord.Embed(title="Jokes", description=)    
+        print(i["punchline"],)
+    embed = discord.Embed(title="Jokes")    
   
         
 try:
