@@ -20,7 +20,7 @@ class chatFilter(commands.Cog):
         Returns:
             integer: Exit code
         """
-        if enabled == True:
+        if enabled is True:
             with open("./src/extensions/chat/badWords.json", "r") as outFile:
                 json.load(outFile)
                 bWordsList = outFile["bad-words"]
@@ -50,7 +50,7 @@ class chatFilter(commands.Cog):
         Args:
             ctx (any): context
         """
-        if enabled == True:
+        if enabled is True:
             await ctx.channel.send("Are you sure you want to disable the word filter? (yes/no)")
             confirm = commands.wait_for("message", timeout=30)
             if confirm.content.lower() == "yes":
@@ -73,12 +73,12 @@ class chatFilter(commands.Cog):
         Args:
             ctx (any): context
         """
-        if enabled == True:
+        if enabled is True:
             await ctx.channel.send("Are you sure you want to disable the word filter? (yes/no)")
             confirm = commands.wait_for("message", timeout=30)
             if confirm.content.lower() == "yes":
                 try:
-                    enabled == True
+                    enabled is True
                     await ctx.channel.send("Alright! The word filter is now **on**")
                 except Exception as err:
                     embed = discord.Embed(title="Oops! Something went wrong!", description="FYI, here's the error: \n ```{err}```")
