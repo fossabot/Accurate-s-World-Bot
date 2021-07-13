@@ -11,6 +11,7 @@ To run and host the bot on your machine, there are a few steps to take.
 Here is a list of the bot dependencies:
 
 1. Discord&#46;py python module (pip install discord&#46;py)
+2. termcolor module (pip install termcolor)
 
 ## Python interpreter
 
