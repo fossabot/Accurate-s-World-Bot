@@ -3,3 +3,5 @@
 .vscode
 TRACE.txt
 *.json
+SECRET.json
+.pyc
