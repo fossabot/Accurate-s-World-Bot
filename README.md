@@ -12,6 +12,7 @@ Here is a list of the bot dependencies:
 
 1. Discord&#46;py python module (pip install discord&#46;py)
 2. termcolor module (pip install termcolor)
+3. Discord-pretty-help (pip install discord-pretty-help)
 
 ## Python interpreter
 
