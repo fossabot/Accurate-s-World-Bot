@@ -42,7 +42,7 @@ class leveling(commands.Cog):
                     
     
     
-    @commands.command()
+    @commands.command(brief="Display your level!")
     async def level(self, ctx, *args, **kwargs):
         """
         rounds the points to the nearest 10, then divides it by ten. Example Below.
