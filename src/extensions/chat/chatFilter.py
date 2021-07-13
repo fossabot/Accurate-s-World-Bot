@@ -39,7 +39,7 @@ class chatFilter(commands.Cog):
             return 0
         
     
-    @commands.group()
+    @commands.group(brief="Manage the Word Filter")
     async def wordfilter(self, ctx):
         if ctx.invoked_subcommand is None:
             embed = discord.Embed(title="Availible commands for **Word Filter**:tm:")
@@ -71,7 +71,7 @@ class chatFilter(commands.Cog):
             return 0
             
             
-    @wordfilter.command()
+    @wordfilter.command(brief="Manage the Word Filter")
     @commands.has_permissions(administrator=True)
     async def enable(self, ctx):
         """Enables the Word Filter
