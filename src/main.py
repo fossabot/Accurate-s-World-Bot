@@ -36,8 +36,16 @@ async def on_ready():
         
         
 @client.command(name="ping", brief="Display Bot ping")
-async def ping(ctx):
-    embed = discord.Embed(title="Pong!", description=str(client.latency) + "ms", color=0x3029b3)
+async def ping(ctx, *args, **kwargs):
+    """Returns Bot Ping
+
+    Args:
+        ctx (any): context
+
+    Returns:
+        integer: Exit code
+    """
+    embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
   
@@ -48,6 +56,7 @@ try:
     
 except ExtensionAlreadyLoaded:
     print(f"[{WARNING}] Cog Already loaded.")
+
 
 except NoEntryPointError:
     raise "[FATAL] Cog does not have a setup function!"
