@@ -32,7 +32,7 @@ async def on_ready():
 
 @client.event
 async def on_ready():
-    print("Bot is online")
+    print(f"[{DEBUG}] Bot is online")
         
         
 @client.command(name="ping", brief="Display Bot ping")
@@ -53,6 +53,8 @@ async def ping(ctx, *args, **kwargs):
 try:
     client.load_extension("extensions.leveling")
     print(f"[{DEBUG}] Leveling extension loaded.")
+    client.load_extension("extensions.chat.chatFilter")
+    print(f"[{DEBUG}] Chat Filter extensions loaded.")
     
 except ExtensionAlreadyLoaded:
     print(f"[{WARNING}] Cog Already loaded.")
@@ -62,6 +64,12 @@ except NoEntryPointError:
     raise "[FATAL] Cog does not have a setup function!"
 
 except ExtensionFailed as err:
+    try:
+        with open("DEBUG/TRACE.txt", "x"):
+            print(f"[{DEBUG} Created TRACE.txt]")
+    except FileExistsError:
+        pass  # I know this isn't good practice but whatever
+    
     with open("DEBUG/TRACE.txt", "w") as f:
         f.append(err)
         
