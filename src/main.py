@@ -40,6 +40,7 @@ async def ping(ctx):
         
 try:
     client.load_extension("extensions.leveling")
+    print(f"[{DEBUG}] Leveling extension loaded.")
     
 except ExtensionAlreadyLoaded:
     print(f"[{WARNING}] Cog Already loaded.")
