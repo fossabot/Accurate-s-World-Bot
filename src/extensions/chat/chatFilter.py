@@ -9,7 +9,7 @@ class chatFilter(commands.Cog):
 
 
     @commands.Cog.listener()
-    async def on_message(self, message):
+    async def on_message(self, ctx, message):
         """Checks each message sent for bad words
 
         Args:
@@ -18,18 +18,14 @@ class chatFilter(commands.Cog):
         Returns:
             integer: Exit code
         """
-        with open("./src/extensions/chat/badWords.json", "r") as f:
-            json.load(f)
-            bWordsList = f["bad-words"]
+        with open("./src/extensions/chat/badWords.json", "r") as outFile:
+            json.load(outFile)
+            bWordsList = outFile["bad-words"]
         if message.content.lower() in bWordsList:
             message.delete()
             embed=discord.Embed(title=f"HEY {message.author.mention}", description="NO BAD WORDS :rage:", color=0xff0000)
-            await message.send(f"?warn {message.author.mention}")
-            
-            async def on_message(message):
-                if message.author.name == "Dyno":
-                    await message.reply("thanks fam :sunglasses:")
-                    return 0
+            await message.send(f".warn {message.author.mention}")
+
             
     
     
