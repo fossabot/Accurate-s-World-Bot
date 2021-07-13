@@ -1,4 +1,3 @@
-from logging import DEBUG
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionFailed, NoEntryPointError
@@ -29,23 +28,19 @@ async def on_disconnect():
 @client.event
 async def on_ready():
     print(f"[{DEBUG}] Bot is online")
-=======
-import json
-
-
-client = commands.Bot(command_prefix="!")
-with open("src\SECRET.json", "r")as f:
-    settings = json.load(f)
-
-
-@client.event
-async def on_ready():
-    print("Bot is online")
-        
+      
         
 @client.command(name="ping", brief="Display Bot ping")
-async def ping(ctx):
-    embed = discord.Embed(title="Pong!", description=str(client.latency) + "ms", color=0x3029b3)
+async def ping(ctx, *args, **kwargs):
+    """Returns Bot Ping
+
+    Args:
+        ctx (any): context
+
+    Returns:
+        integer: Exit code
+    """
+    embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
   
@@ -56,6 +51,7 @@ try:
     
 except ExtensionAlreadyLoaded:
     print(f"[{WARNING}] Cog Already loaded.")
+
 
 except NoEntryPointError:
     raise "[FATAL] Cog does not have a setup function!"
