@@ -3,11 +3,17 @@ from discord.ext import commands
 import json
 
 
+enabled = True
+
+
 class chatFilter(commands.Cog):
     def __init__(self, bot:commands.Bot):
+        """__init__
+
+        Args:
+            bot (module): bot instance
+        """
         self.bot = bot
-        global enabled
-        enabled = True
 
 
     @commands.Cog.listener()
@@ -20,13 +26,16 @@ class chatFilter(commands.Cog):
         Returns:
             integer: Exit code
         """
+        global enabled
         if enabled is True:
             with open("./src/extensions/chat/badWords.json", "r") as outFile:
                 json.load(outFile)
                 bWordsList = outFile["bad-words"]
             if message.content.lower() in bWordsList:
                 message.delete()
+                
                 embed = discord.Embed(title=f"HEY {message.author.mention}", description="NO BAD WORDS :rage:", color=0xff0000)
+                await ctx.channel.send(embed=embed)
                 await message.send(f".warn {message.author.mention}")
         else:
             return 0
@@ -50,6 +59,7 @@ class chatFilter(commands.Cog):
         Args:
             ctx (any): context
         """
+        global enabled
         if enabled is True:
             await ctx.channel.send("Are you sure you want to disable the word filter? (yes/no)")
             confirm = commands.wait_for("message", timeout=30)
@@ -73,15 +83,17 @@ class chatFilter(commands.Cog):
         Args:
             ctx (any): context
         """
+        global enabled
         if enabled is True:
             await ctx.channel.send("Are you sure you want to disable the word filter? (yes/no)")
             confirm = commands.wait_for("message", timeout=30)
             if confirm.content.lower() == "yes":
                 try:
-                    enabled is True
+                    enabled = True
                     await ctx.channel.send("Alright! The word filter is now **on**")
-                except Exception as err:
+                except Exception:
                     embed = discord.Embed(title="Oops! Something went wrong!", description="FYI, here's the error: \n ```{err}```")
+                    await ctx.channel.send(embed=embed)
                     return 0
             else:
                 await ctx.channel.send("OK! The word filter remains **off**")
