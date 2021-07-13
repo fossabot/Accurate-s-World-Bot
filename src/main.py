@@ -2,17 +2,33 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.errors import ExtensionAlreadyLoaded, ExtensionFailed, NoEntryPointError
 import json
+import sys
+from termcolor import colored
 
 
 client = commands.Bot(command_prefix="!")
+DEBUG = colored("DEBUG", "green")
+FATAL = colored("FATAL", "red")
+WARNING = colored("WARNING", "yellow")
 with open("src\SECRET.json", "r")as f:
     settings = json.load(f)
+    
+    
+@client.event
+async def on_connect():
+    print(f"[{DEBUG}] Successfully connected to Discord Servers")
+    
+    
+@client.event
+async def on_disconnect():
+    print(f"[{FATAL}] Disconnect from Discord servers. Exiting.")
+    sys.exit()
 
 
 @client.event
 async def on_ready():
-    print("Bot is online")
-        
+    print(f"[{DEBUG}] Bot is online")
+      
         
 @client.command(name="ping", brief="Display Bot ping")
 async def ping(ctx, *args, **kwargs):
@@ -27,14 +43,15 @@ async def ping(ctx, *args, **kwargs):
     embed = discord.Embed(title="Pong!", description=client.latency + "ms")
     await ctx.channel.send(embed=embed)
     return 0
-        
+  
         
 try:
-    #  client.load_extension("src/extensions/leveling.py")
-    client.load_extension("extensions.chat.chatFilter")
+    client.load_extension("extensions.leveling")
+    print(f"[{DEBUG}] Leveling extension loaded.")
     
 except ExtensionAlreadyLoaded:
-    print("[WARN] Cog Already loaded.")
+    print(f"[{WARNING}] Cog Already loaded.")
+
 
 except NoEntryPointError:
     raise "[FATAL] Cog does not have a setup function!"
@@ -43,7 +60,7 @@ except ExtensionFailed as err:
     with open("DEBUG/TRACE.txt", "w") as f:
         f.append(err)
         
-    raise "[FATAL] Extension failed loading (runtime error)! Traceback was stored in DEBUG/TRACE.txt"
+    raise f"[{FATAL}] Extension failed loading (runtime error)! Traceback was stored in DEBUG/TRACE.txt"
 
 
 client.run(settings["token"])
