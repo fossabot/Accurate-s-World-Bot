@@ -1,4 +1,5 @@
 # Accurate's World Bot [![CodeFactor](https://www.codefactor.io/repository/github/shadawcraw/accurate-s-world-bot/badge)](https://www.codefactor.io/repository/github/shadawcraw/accurate-s-world-bot)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshadawcraw%2FAccurate-s-World-Bot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshadawcraw%2FAccurate-s-World-Bot?ref=badge_shield)
 
 This bot is used in the Accurate's World Discord Server
 
@@ -37,3 +38,7 @@ Steps to create this file:
 ## Server
 
 Psst! One last thing, join the discord server the bot was made for! https://discord.gg/PUxVyEaj26
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshadawcraw%2FAccurate-s-World-Bot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshadawcraw%2FAccurate-s-World-Bot?ref=badge_large)
